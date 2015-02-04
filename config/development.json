@@ -1,0 +1,12 @@
+/*
+ * Development configuration file.
+ *
+ */
+
+{
+    "app": {
+      "http": {
+        "port": 3000
+      }
+    }
+}

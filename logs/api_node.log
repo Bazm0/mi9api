@@ -1,0 +1,5 @@
+{"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-04T22:49:09.311Z"}
+{"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-04T22:49:14.889Z"}
+{"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-04T22:49:35.842Z"}
+{"level":"info","message":"127.0.0.1 - - [04/Feb/2015:22:50:26 +0000] \"GET / HTTP/1.1\" 200 34 \"-\" \"node-superagent/0.21.0\"\n","timestamp":"2015-02-04T22:50:26.220Z"}
+{"level":"info","message":"127.0.0.1 - - [04/Feb/2015:22:50:26 +0000] \"POST /test HTTP/1.1\" 200 34 \"-\" \"node-superagent/0.21.0\"\n","timestamp":"2015-02-04T22:50:26.261Z"}
