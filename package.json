@@ -21,14 +21,12 @@
     "express-partial-response": "^0.3.4",
     "helmet": "^0.6.0",
     "morgan": "^1.5.1",
-    "winston": "^0.9.0"
-  },
-  "engines": {
-    "node": "0.10.36"
-  },
-  "devDependencies": {
+    "winston": "^0.9.0",
     "lodash": "^3.1.0",
     "mocha": "^2.1.0",
     "supertest": "^0.15.0"
+  },
+  "engines": {
+    "node": "0.10.36"
   }
 }

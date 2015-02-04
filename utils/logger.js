@@ -3,7 +3,7 @@
 var winston = require('winston');
 winston.emitErrs = true;
 
-var logFile = process.env.NODE_ENV === 'development' ? __dirname + '/../logs/api_node.log' : '/var/log/metadata-api/api_node.log';
+var logFile = process.env.NODE_ENV !== 'development' ? __dirname + '/../logs/api_node.log' : '/var/log/metadata-api/api_node.log';
 
 var logger = new winston.Logger({
     transports: [
