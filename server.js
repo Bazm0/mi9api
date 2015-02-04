@@ -7,6 +7,7 @@ var express = require('express');
 var errorhandler = require('errorhandler');
 var bodyParser = require('body-parser');
 var morgan = require('morgan');
+var cors = require('cors');
 var helmet = require('helmet');
 var partialResponse = require('express-partial-response');
 
@@ -35,6 +36,8 @@ app.use(morgan('combined', {
 // parse application/json
 app.use(bodyParser.json());
 
+//Add cors support
+app.use(cors());
 
 // handling 401 errors
 app.use(function(err, req, res, next) {
