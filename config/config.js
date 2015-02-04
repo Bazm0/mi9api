@@ -10,27 +10,11 @@ var config = convict({
     env: 'NODE_ENV'
   },
   app: {
-    ip: {
-      doc: 'The IP address to bind',
-      format: 'ipaddress',
-      default: '127.0.0.1',
-      env: 'IP_ADDRESS'
-    },
-    http: {
-      port: {
-        doc: 'HTTP port to bind',
-        format: 'port',
-        default: 3000,
-        env: 'HTTP_PORT'
-      }
-    },
-    https: {
-      port: {
-        doc: 'HTTPs port to bind',
-        format: 'port',
-        default: 3443,
-        env: 'HTTPS_PORT'
-      }
+    port: {
+      doc: 'HTTP port to bind',
+      format: 'port',
+      default: 3000,
+      env: 'PORT'
     }
   },
   test: { 
