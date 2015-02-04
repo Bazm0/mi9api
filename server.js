@@ -67,6 +67,6 @@ app.on('error', function(err) {
 
 //Start Server Listening on port if module parent
 if (!module.parent) {
-  app.listen(config.get('app.http.port'));
-  logger.info('--- mi9api started on port ' + config.get('app.http.port') + ' ---');
+  app.listen(config.get('app.port'));
+  logger.info('--- mi9api started on port ' + config.get('app.port') + ' ---');
 }
