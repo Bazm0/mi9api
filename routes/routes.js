@@ -28,6 +28,7 @@ var routes = {
         throw 'Incorrect post request data.';
       }
 
+      // Pipe result
       res.status(200).json({
         response: shows.payload
           .filter(function(show) {
