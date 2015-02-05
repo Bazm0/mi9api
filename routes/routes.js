@@ -16,12 +16,6 @@ var routes = {
       showsData += data;
     });
 
-    req.on('error', function(error) {
-      return res.status(400).send({
-        'error': 'Could not decode request: deserializing request' + error
-      });
-    });
-
     req.on('end', function() {
 
       logger.debug('shows:  %s', showsData);
