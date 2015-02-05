@@ -49,7 +49,7 @@ var routes = {
             slug: item.slug,
             title: item.title
           };
-        }));
+        }).value());
 
 
     } catch (e) {
