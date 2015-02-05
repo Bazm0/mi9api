@@ -25,7 +25,6 @@ var routes = {
         throw new Error('Incorrect post request data.');
       }
 
-
       var result =
         _.chain(shows.payload)
         .filter(function(item) {
@@ -40,7 +39,7 @@ var routes = {
         });
 
 
-      res.status(200).send(result);
+      res.send(result);
 
 
     } catch (e) {
