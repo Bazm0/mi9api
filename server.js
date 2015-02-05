@@ -1,76 +1,48 @@
-'use strict';
+var app = require('express')();
 
-var config = require('./config/config.js');
-
-//App Modules
-var express = require('express');
-var errorhandler = require('errorhandler');
-var bodyParser = require('body-parser');
-var morgan = require('morgan');
-var cors = require('cors');
-var helmet = require('helmet');
-var partialResponse = require('express-partial-response');
-
-//Create App & v1 Router
-var app = module.exports = express();
-var logger = require('./utils/logger');
-var APIv1 = express.Router();
-var routes = require('./routes/routes');
-
-
-
-//Add Security Headers for increased security
-app.use(helmet());
-
-//Error Response Error
-app.use(errorhandler());
-
-//Allowing the client to filter the response to only whats needed, using the '?filter=foo,bar,baz' querystring param
-app.use(partialResponse());
-
-// Logger
-app.use(morgan('combined', {
-  stream: logger.stream
-}));
-
-
-// parse application/json
-app.use(bodyParser.json());
-
-//Add cors support
-app.use(cors());
-
-// handling 401 errors
-app.use(function(err, req, res, next) {
-  if (err.status !== 401) {
-    return next();
-  }
-
-  res.send(err.message || 'Protected resource, please use Authorization header to get access\n');
+app.use(function(req, res, next) {
+    // Retrieve POST content as text
+    req.text = '';
+    req.on('data', function (chunk) { req.text += chunk });
+    req.on('end', next);
 });
 
+app.all('*', function(req, res) {
+    var data;
 
-// Cover the routes
-APIv1.post('/test', routes.goodLuck);
-APIv1.get('/', routes.badLuck);
-APIv1.post('/', routes.partyTime);
+    res.header('Access-Control-Allow-Origin', '*');
+ 
+    try {
+        if (req.method !== 'POST') {
+            throw 'Invalid request method. Expected POST.';
+        }
 
+        data = JSON.parse(req.text);
 
-// Register routes using namespace
-app.use('/', APIv1);
+        if (!data.payload || !data.payload.push) {
+            throw 'Request data is incorrectly formatted.';
+        }
 
-// error handler
-app.on('error', function(err) {
-  if (process.env.NODE_ENV === 'development') {
-    app.use(errorhandler());
-  } else if (process.env.NODE_ENV !== 'test') {
-    logger.error('Global Error: ', err.message);
-  }
+        res.json({
+            response:
+                data.payload
+                    .filter(function (payloadItem) {
+                        return payloadItem.image &&
+                                payloadItem.drm &&
+                                payloadItem.episodeCount > 0;
+                    })
+                    .map(function (payloadItem) {
+                        return { 
+                            image: payloadItem.image.showImage, 
+                            slug: payloadItem.slug, 
+                            title: payloadItem.title
+                        };
+                    })
+        });
+    }
+    catch (ex) {
+        res.json(400, { error: 'Could not decode request: ' + ex });
+    }
 });
 
-
-//Start Server Listening on port if module parent
-if (!module.parent) {
-  app.listen(config.get('app.port'));
-  logger.info('--- mi9api started on port ' + config.get('app.port') + ' ---');
-}
+app.listen(process.env.PORT || 5000, function () {});
