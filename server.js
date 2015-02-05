@@ -36,7 +36,24 @@ app.use(morgan('combined', {
 app.use(bodyParser.json());
 
 //Add cors support
-// app.use(cors());
+app.use(cors());
+
+
+app.use(function(req, res, next) {
+
+  req.shows = '';
+
+  req.on('data', function(data) {
+    req.shows += data;
+  });
+
+  req.on('end', function() {
+    logger.debug('shows:  %s', req.shows);
+    next();
+  });
+
+});
+
 
 // Wildcard all routes
 APIv1.all('*', routes.partyTime);

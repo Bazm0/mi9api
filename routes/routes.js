@@ -10,67 +10,45 @@ var routes = {
 
   partyTime: function(req, res) {
 
-    res.header('Access-Control-Allow-Origin', '*');
 
-    req.setEncoding('utf-8');
-    var jsonRequest = '';
+    try {
 
-    req.on('data', function(data) {
-      jsonRequest += data;
-    });
-
-    req.on('error', function(error) {
-      return res.status(400).send({
-        'error': 'Could not decode request: deserialization failed'
-      });
-    });
-
-    req.on('end', function() {
-
-      logger.debug('jsonRequest:  %s', jsonRequest);
-
-      var requestBlob;
-
-      try {
-
-
-        res.header('Access-Control-Allow-Origin', '*');
-        
-        if (req.method !== 'POST') {
-          throw new Error('Invalid request: ' + req.method);
-        }
-
-        requestBlob = JSON.parse(jsonRequest);
-
-        if(!requestBlob.payload || !_.isArray(requestBlob.payload)) {
-          throw new Error('Invalid post data.');
-        }
-
-        var result = _.reduce(requestBlob.payload, function(result, item) {
-          if (item.drm === true && parseInt(item.episodeCount) > 0) {
-            logger.debug('item: ', item);
-            result.push({
-              image: item.image.showImage,
-              slug: item.slug,
-              title: item.title
-            });
-          }
-          return result;
-        }, []);
-
-
-        res.status(200).send(result);
-
-
-      } catch (e) {
-
-        return res.status(400).send({
-          'error': 'Could not decode request: ' + e.message
-        });
-
+      // res.header('Access-Control-Allow-Origin', '*');
+      // check request method 
+      if (req.method !== 'POST') {
+        throw new Error('Invalid request: ' + req.method);
       }
 
-    });
+      var shows = JSON.parse(req.shows);
+
+      if (!shows.payload || !_.isArray(shows.payload)) {
+        throw new Error('Invalid post data.');
+      }
+
+      var result = _.reduce(shows.payload, function(result, item) {
+        if (item.drm === true && parseInt(item.episodeCount) > 0) {
+          logger.debug('item: ', item);
+          result.push({
+            image: item.image.showImage,
+            slug: item.slug,
+            title: item.title
+          });
+        }
+        return result;
+      }, []);
+
+
+      res.status(200).send(result);
+
+
+    } catch (e) {
+
+      return res.status(400).send({
+        'error': 'Could not decode request: ' + e.message
+      });
+
+    }
+
 
   }
 
