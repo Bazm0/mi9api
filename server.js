@@ -22,10 +22,10 @@ var routes = require('./routes/routes');
 // app.use(helmet());
 
 //Error Response Error
-app.use(errorhandler());
+// app.use(errorhandler());
 
 //Allowing the client to filter the response to only whats needed, using the '?filter=foo,bar,baz' querystring param
-app.use(partialResponse());
+// app.use(partialResponse());
 
 // Logger
 app.use(morgan('combined', {
