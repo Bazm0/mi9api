@@ -13,7 +13,7 @@ var routes = {
 
     try {
 
-      // res.header('Access-Control-Allow-Origin', '*');
+      res.header('Access-Control-Allow-Origin', '*');
       // check request method 
       if (req.method !== 'POST') {
         throw new Error('Invalid request: ' + req.method);
