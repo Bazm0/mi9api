@@ -19,7 +19,7 @@ var routes = require('./routes/routes');
 
 
 //Add Security Headers for increased security
-app.use(helmet());
+// app.use(helmet());
 
 //Error Response Error
 app.use(errorhandler());
