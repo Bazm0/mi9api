@@ -10,21 +10,45 @@ describe('Api Operations', function(){
   this.timeout(10*1000);
 
 
-  it('Should dash encode all movie media, with status 200', function(done){
+  it('Get Should fail response, with status 400', function(done){
 
     request
         .get('/')
-        .expect(200, done);
+        .expect(400, done);
+
+  });
+
+  it('Put Should fail response, with status 400', function(done){
+
+    request
+        .put('/')
+        .expect(400, done);
 
   });
 
 
+  it('Delete Should fail response, with status 400', function(done){
+
+    request
+        .delete('/')
+        .expect(400, done);
+
+  });
+
+
+  it('Head Should fail response, with status 400', function(done){
+
+    request
+        .head('/')
+        .expect(400, done);
+
+  });
 
   it('Should return parsed response, with status 200', function(done){
 
     request
-      .post('/test')
-      .send({ "username" : "baz" })
+      .post('/')
+      .send(postJson)
       .expect(200)
       .end(function(err, res) {
         done();

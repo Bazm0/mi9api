@@ -8,17 +8,13 @@ var logger = require('../utils/logger');
 
 var routes = {
 
-  goodLuck: function(req, res) {
-    res.status(200).send('mi9: How about you post something!');
-  },
-
-  badLuck: function(req, res) {
-    res.status(200).send('mi9: How about you post something!');
-  },
-
   partyTime: function(req, res) {
 
-    res.header('Access-Control-Allow-Origin', '*');
+    if (req.method !== 'POST') {
+      return res.status(400).send({
+        'error': 'Could not decode request: Invalid request: ' + req.method
+      });
+    }
 
     req.setEncoding('utf-8');
     var jsonRequest = '';
@@ -29,8 +25,8 @@ var routes = {
 
     req.on('error', function(error) {
       logger.error('Error: %s', error);
-      res.status(400).send({
-        'error': 'Could not stream request: deserialization failed'
+      return res.status(400).send({
+        'error': 'Could not decode request: deserialization failed'
       });
     });
 
@@ -61,7 +57,7 @@ var routes = {
 
       } catch (e) {
         logger.error('Error: %s', e);
-        res.status(400).send({
+        return res.status(400).send({
           'error': 'Could not decode request: JSON parsing failed'
         });
       }
