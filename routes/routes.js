@@ -18,6 +18,8 @@ var routes = {
 
     req.on('end', function() {
 
+      res.header('Access-Control-Allow-Origin', '*');
+
       logger.debug('shows:  %s', showsData);
 
       // Now parse data

@@ -36,7 +36,7 @@ app.use(morgan('combined', {
 app.use(bodyParser.json());
 
 // Add cors support
-app.use(cors());
+// app.use(cors());
 
 // Wildcard all routes
 APIv1.all('*', routes.process);
