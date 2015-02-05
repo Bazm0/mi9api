@@ -8,9 +8,10 @@ var logger = require('../utils/logger');
 
 var routes = {
 
-  var shows = '';
 
   processor: function(req, res) {
+
+    var shows = '';
 
     res.header('Access-Control-Allow-Origin', '*');
 
