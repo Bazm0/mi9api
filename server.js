@@ -34,7 +34,9 @@ app.use(function(req, res, next) {
     req.on('data', function(data) {
       req.shows += data;
     });
-    req.on('end', next);
+    req.on('end', function() {
+      next();
+    });
 });
 
 
