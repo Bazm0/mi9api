@@ -13,7 +13,7 @@ var routes = {
 
     var shows;
 
-    res.header('Access-Control-Allow-Origin', '*');
+    // res.header('Access-Control-Allow-Origin', '*');
 
     // Now parse data
     try {
@@ -28,64 +28,20 @@ var routes = {
         throw new Error('Invalid post data.');
       }
 
-      // Pipe result
-      // res.status(200).json({
-      //   response: shows.payload
-      //     .filter(function(show) {
-      //       return show.image && show.drm && show.episodeCount > 0;
-      //     })
-      //     .map(function(show) {
-      //       return {
-      //         image: show.image.showImage,
-      //         slug: show.slug,
-      //         title: show.title
-      //       };
-      //     })
-      // });
 
-
-      // var result = shows.payload
-      //   .filter(function(show) {
-      //     return show.image && show.drm && show.episodeCount > 0;
-      //   })
-      //   .map(function(show) {
-      //     return {
-      //       image: show.image.showImage,
-      //       slug: show.slug,
-      //       title: show.title
-      //     };
-      //   });
-
-
-      // res.status(200).send(result);
-
-
-      // res.status(200).json({response: _.chain(shows.payload)
-      //   .filter(function(item) {
-      //     return item.image && item.drm && item.episodeCount > 0;
-      //   })
-      //   .map(function(item) {
-      //     return {
-      //       image: item.image.showImage,
-      //       slug: item.slug,
-      //       title: item.title
-      //     };
-      //   }).value()});
-      //   
-      //   
-      
-
-     res.status(200).json({response: _.reduce(shows.payload, function(result, item) {
-        if (item.drm && item.image && item.episodeCount > 0) {
-          logger.debug('item: ', item);
-          result.push({
-            image: item.image.showImage,
-            slug: item.slug,
-            title: item.title
-          });
-        }
-        return result;
-      }, [])});
+      res.status(200).json({
+        response: _.reduce(shows.payload, function(result, item) {
+          if (item.drm && item.image && item.episodeCount > 0) {
+            logger.debug('item: ', item);
+            result.push({
+              image: item.image.showImage,
+              slug: item.slug,
+              title: item.title
+            });
+          }
+          return result;
+        }, [])
+      });
 
 
     } catch (e) {
