@@ -10,6 +10,8 @@ var routes = {
 
   partyTime: function(req, res) {
 
+    res.header('Access-Control-Allow-Origin', '*');
+
     req.setEncoding('utf-8');
     var jsonRequest = '';
 
@@ -65,7 +67,7 @@ var routes = {
         return res.status(400).send({
           'error': 'Could not decode request: ' + e.message
         });
-        
+
       }
 
     });
