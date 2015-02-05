@@ -8,62 +8,52 @@ var logger = require('../utils/logger');
 
 var routes = {
 
-  process: function(req, res) {
+  processor: function(req, res) {
 
-    var showsData = '';
+    res.header('Access-Control-Allow-Origin', '*');
 
-    req.on('data', function(data) {
-      showsData += data;
-    });
+    // Now parse data
+    try {
 
-    req.on('end', function() {
+      if (req.method !== 'POST') {
+        throw new Error('Invalid request operation.');
+      }
 
-      res.header('Access-Control-Allow-Origin', '*');
+      var shows = JSON.parse(req.shows);
 
-      logger.debug('shows:  %s', showsData);
-
-      // Now parse data
-      
-      try {
-
-        if (req.method !== 'POST') {
-          throw new Error('Invalid request operation.');
-        }
-
-        var shows = JSON.parse(showsData);
-
-        if (_.isUndefined(shows.payload) || !_.isArray(shows.payload)) {
-          throw new Error('Incorrect post request data.');
-        }
-
-
-        var result =
-          _.chain(shows.payload)
-          .filter(function(item) {
-            return item.image && item.drm && item.episodeCount > 0;
-          })
-          .map(function(item) {
-            return {
-              image: item.image.showImage,
-              slug: item.slug,
-              title: item.title
-            };
-          });
-
-
-        res.status(200).send(result);
-
-
-      } catch (e) {
-
-        return res.status(400).send({
-          'error': 'Could not decode request: ' + e.message
-        });
-
+      if (_.isUndefined(shows.payload) || !_.isArray(shows.payload)) {
+        throw new Error('Incorrect post request data.');
       }
 
 
-    });
+      var result =
+        _.chain(shows.payload)
+        .filter(function(item) {
+          return item.image && item.drm && item.episodeCount > 0;
+        })
+        .map(function(item) {
+          return {
+            image: item.image.showImage,
+            slug: item.slug,
+            title: item.title
+          };
+        });
+
+
+      res.status(200).send(result);
+
+
+    } catch (e) {
+
+      return res.status(400).send({
+        'error': 'Could not decode request: ' + e.message
+      });
+
+    }
+
+
+
+
 
 
 

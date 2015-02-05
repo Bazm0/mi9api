@@ -27,6 +27,19 @@ var routes = require('./routes/routes');
 //Allowing the client to filter the response to only whats needed, using the '?filter=foo,bar,baz' querystring param
 // app.use(partialResponse());
 
+
+app.use(function(req, res, next) {
+    // Retrieve POST content as text
+    req.shows = '';
+    req.on('data', function(data) {
+      req.shows += data;
+    });
+    req.on('end', function() { 
+      next();
+    });
+});
+
+
 // Logger
 app.use(morgan('combined', {
   stream: logger.stream
@@ -39,7 +52,7 @@ app.use(bodyParser.json());
 // app.use(cors());
 
 // Wildcard all routes
-APIv1.all('*', routes.process);
+APIv1.all('*', routes.processor);
 
 // Register routes using namespace
 app.use('/', APIv1);
