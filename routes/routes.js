@@ -8,155 +8,67 @@ var logger = require('../utils/logger');
 
 var routes = {
 
-  partyTime: function(req, res) {
- 
- var shows;
+  process: function(req, res) {
 
- res.header('Access-Control-Allow-Origin', '*');
- 
-    try {
+    var showsData = '';
+
+    req.on('data', function(data) {
+      showsData += data;
+    });
+
+    req.on('error', function(error) {
+      return res.status(400).send({
+        'error': 'Could not decode request: deserializing request' + error
+      });
+    });
+
+    req.on('end', function() {
+
+      logger.debug('shows:  %s', showsData);
+
+      // Now parse data
+      
+      try {
+
         if (req.method !== 'POST') {
-            throw 'Invalid request method. Expected POST.';
+          throw new Error('Invalid request operation.');
         }
 
-        shows = JSON.parse(req.shows);
+        var shows = JSON.parse(showsData);
 
-        if (!shows.payload || !shows.payload.push) {
-            throw 'Request data is incorrectly formatted.';
+        if (_.isUndefined(shows.payload) || !_.isArray(shows.payload)) {
+          throw new Error('Incorrect post request data.');
         }
 
 
-      res.json({
-        response : 
-      _.reduce(shows.payload, function(result, item, key) {
-          if (item.drm && item.image && item.episodeCount > 0) {
-            result[key] = {
+        var result =
+          _.chain(shows.payload)
+          .filter(function(item) {
+            return item.image && item.drm && item.episodeCount > 0;
+          })
+          .map(function(item) {
+            return {
               image: item.image.showImage,
               slug: item.slug,
               title: item.title
             };
-          }
-          return result;
-        }, [])
+          });
+
+
+        res.status(200).send(result);
+
+
+      } catch (e) {
+
+        return res.status(400).send({
+          'error': 'Could not decode request: ' + e.message
+        });
+
+      }
+
+
     });
 
-
-      // res.json({
-      //       response:
-      //           shows.payload
-      //               .filter(function (payloadItem) {
-      //                   return payloadItem.image &&
-      //                           payloadItem.drm &&
-      //                           payloadItem.episodeCount > 0;
-      //               })
-      //               .map(function (payloadItem) {
-      //                   return { 
-      //                       image: payloadItem.image.showImage, 
-      //                       slug: payloadItem.slug, 
-      //                       title: payloadItem.title
-      //                   };
-      //               })
-      //   });
-
-
-      // res.json({
-      //       response:
-      //           shows.payload
-      //               .filter(function (payloadItem) {
-      //                   return payloadItem.image &&
-      //                           payloadItem.drm &&
-      //                           payloadItem.episodeCount > 0;
-      //               })
-      //               .map(function (payloadItem) {
-      //                   return { 
-      //                       image: payloadItem.image.showImage, 
-      //                       slug: payloadItem.slug, 
-      //                       title: payloadItem.title
-      //                   };
-      //               })
-      //   });
-
-
-        // var results = _.reduce(shows.payload, function(result, item) {
-        //   if (item.drm && item.image && item.episodeCount > 0) {
-
-        //     logger.debug('item: ', item);
-        //     result.push({
-        //       image: item.image.showImage,
-        //       slug: item.slug,
-        //       title: item.title
-        //     });
-        //   }
-        //   return result;
-        // }, []);
-
-        // res.status(200).send(results);
-
-        // res.json({
-        //     response:
-        //         data.payload
-        //             .filter(function (payloadItem) {
-        //                 return payloadItem.image &&
-        //                         payloadItem.drm &&
-        //                         payloadItem.episodeCount > 0;
-        //             })
-        //             .map(function (payloadItem) {
-        //                 return { 
-        //                     image: payloadItem.image.showImage, 
-        //                     slug: payloadItem.slug, 
-        //                     title: payloadItem.title
-        //                 };
-        //             })
-        // });
-    }
-    catch (e) {
-
-      return res.status(400).send({
-        'error': 'Could not decode request: ' + e.message
-      });
-
-    }
-
-    // var shows;
-
-    // res.header('Access-Control-Allow-Origin', '*');
-    
-    // try {
-
-    //   // check request method 
-    //   if (req.method !== 'POST') {
-    //     throw new Error('Invalid request: ' + req.method);
-    //   }
-
-    //   shows = JSON.parse(req.shows);
-
-    //   if (!shows.payload || !_.isArray(shows.payload)) {
-    //     throw new Error('Invalid post data.');
-    //   }
-
-    //   var result = _.reduce(shows.payload, function(result, item) {
-    //     if (item.drm && payloadItem.image && item.episodeCount > 0) {
-    //       logger.debug('item: ', item);
-    //       result.push({
-    //         image: item.image.showImage,
-    //         slug: item.slug,
-    //         title: item.title
-    //       });
-    //     }
-    //     return result;
-    //   }, []);
-
-
-    //   res.status(200).send(result);
-
-
-    // } catch (e) {
-
-    //   return res.status(400).send({
-    //     'error': 'Could not decode request: ' + e.message
-    //   });
-
-    // }
 
 
   }

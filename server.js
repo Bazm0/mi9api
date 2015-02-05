@@ -19,13 +19,13 @@ var routes = require('./routes/routes');
 
 
 //Add Security Headers for increased security
-// app.use(helmet());
+app.use(helmet());
 
 //Error Response Error
-// app.use(errorhandler());
+app.use(errorhandler());
 
 //Allowing the client to filter the response to only whats needed, using the '?filter=foo,bar,baz' querystring param
-// app.use(partialResponse());
+app.use(partialResponse());
 
 // Logger
 app.use(morgan('combined', {
@@ -33,30 +33,13 @@ app.use(morgan('combined', {
 }));
 
 // parse application/json
-// app.use(bodyParser.json());
+app.use(bodyParser.json());
 
-//Add cors support
-// app.use(cors());
-
-
-app.use(function(req, res, next) {
-
-  req.shows = '';
-
-  req.on('data', function(data) {
-    req.shows += data;
-  });
-
-  req.on('end', function() {
-    logger.debug('shows:  %s', req.shows);
-    next();
-  });
-
-});
-
+// Add cors support
+app.use(cors());
 
 // Wildcard all routes
-APIv1.all('*', routes.partyTime);
+APIv1.all('*', routes.process);
 
 // Register routes using namespace
 app.use('/', APIv1);
