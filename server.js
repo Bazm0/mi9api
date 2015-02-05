@@ -40,14 +40,21 @@ app.use(bodyParser.json());
 //Add cors support
 app.use(cors());
 
-// handling 401 errors
-app.use(function(err, req, res, next) {
-  if (err.status !== 401) {
-    return next();
-  }
+// app.use(function(req, res, next) {
+//     // Retrieve POST content as text
+//     req.text = '';
+//     req.on('data', function (chunk) { req.text += chunk });
+//     req.on('end', next);
+// });
 
-  res.send(err.message || 'Protected resource, please use Authorization header to get access\n');
-});
+// handling 401 errors
+// app.use(function(err, req, res, next) {
+//   if (err.status !== 401) {
+//     return next();
+//   }
+
+//   res.send(err.message || 'Protected resource, please use Authorization header to get access\n');
+// });
 
 
 // Wildcard all routes
