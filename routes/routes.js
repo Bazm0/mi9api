@@ -28,8 +28,7 @@ var routes = {
         throw new Error('Incorrect post request data.');
       }
 
-
-      res.json({
+      res.status(200).json({
         response: shows.payload
           .filter(function(show) {
             return show.image && show.drm && show.episodeCount > 0;
