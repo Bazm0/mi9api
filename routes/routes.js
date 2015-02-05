@@ -26,23 +26,55 @@ var routes = {
         }
 
 
-
       res.json({
-            response:
-                shows.payload
-                    .filter(function (payloadItem) {
-                        return payloadItem.image &&
-                                payloadItem.drm &&
-                                payloadItem.episodeCount > 0;
-                    })
-                    .map(function (payloadItem) {
-                        return { 
-                            image: payloadItem.image.showImage, 
-                            slug: payloadItem.slug, 
-                            title: payloadItem.title
-                        };
-                    })
-        });
+        response : 
+      _.reduce(shows.payload, function(result, item, key) {
+          if (item.drm && item.image && item.episodeCount > 0) {
+            result[key] = {
+              image: item.image.showImage,
+              slug: item.slug,
+              title: item.title
+            };
+          }
+          return result;
+        }, [])
+    });
+
+
+      // res.json({
+      //       response:
+      //           shows.payload
+      //               .filter(function (payloadItem) {
+      //                   return payloadItem.image &&
+      //                           payloadItem.drm &&
+      //                           payloadItem.episodeCount > 0;
+      //               })
+      //               .map(function (payloadItem) {
+      //                   return { 
+      //                       image: payloadItem.image.showImage, 
+      //                       slug: payloadItem.slug, 
+      //                       title: payloadItem.title
+      //                   };
+      //               })
+      //   });
+
+
+      // res.json({
+      //       response:
+      //           shows.payload
+      //               .filter(function (payloadItem) {
+      //                   return payloadItem.image &&
+      //                           payloadItem.drm &&
+      //                           payloadItem.episodeCount > 0;
+      //               })
+      //               .map(function (payloadItem) {
+      //                   return { 
+      //                       image: payloadItem.image.showImage, 
+      //                       slug: payloadItem.slug, 
+      //                       title: payloadItem.title
+      //                   };
+      //               })
+      //   });
 
 
         // var results = _.reduce(shows.payload, function(result, item) {

@@ -87,3 +87,14 @@
 {"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-05T02:08:12.269Z"}
 {"level":"info","message":"127.0.0.1 - - [05/Feb/2015:02:08:20 +0000] \"POST / HTTP/1.1\" 200 938 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T02:08:20.012Z"}
 {"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-05T02:13:45.998Z"}
+{"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-05T02:19:04.140Z"}
+{"level":"info","message":"127.0.0.1 - - [05/Feb/2015:02:19:14 +0000] \"POST / HTTP/1.1\" 400 76 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T02:19:14.488Z"}
+{"level":"info","message":"127.0.0.1 - - [05/Feb/2015:02:19:17 +0000] \"POST / HTTP/1.1\" 400 76 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T02:19:17.060Z"}
+{"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-05T02:19:29.689Z"}
+{"level":"info","message":"127.0.0.1 - - [05/Feb/2015:02:19:32 +0000] \"POST / HTTP/1.1\" 400 76 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T02:19:32.624Z"}
+{"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-05T02:20:59.922Z"}
+{"level":"info","message":"127.0.0.1 - - [05/Feb/2015:02:21:04 +0000] \"POST / HTTP/1.1\" 400 74 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T02:21:04.272Z"}
+{"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-05T02:21:59.971Z"}
+{"level":"info","message":"127.0.0.1 - - [05/Feb/2015:02:22:15 +0000] \"POST / HTTP/1.1\" - - \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T02:22:15.656Z"}
+{"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-05T02:23:20.320Z"}
+{"level":"info","message":"127.0.0.1 - - [05/Feb/2015:02:23:21 +0000] \"POST / HTTP/1.1\" 200 961 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T02:23:21.224Z"}
