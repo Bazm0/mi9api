@@ -33,7 +33,7 @@ app.use(morgan('combined', {
 }));
 
 // parse application/json
-app.use(bodyParser.json());
+// app.use(bodyParser.json());
 
 //Add cors support
 // app.use(cors());
