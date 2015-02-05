@@ -10,6 +10,8 @@ var routes = {
 
   partyTime: function(req, res) {
 
+    res.header('Access-Control-Allow-Origin', '*');
+    
     if (req.method !== 'POST') {
       return res.status(400).send({
         'error': 'Could not decode request: Invalid request: ' + req.method
