@@ -60,17 +60,32 @@ var routes = {
       // res.status(200).send(result);
 
 
-      res.status(200).json({response: _.chain(shows.payload)
-        .filter(function(item) {
-          return item.image && item.drm && item.episodeCount > 0;
-        })
-        .map(function(item) {
-          return {
+      // res.status(200).json({response: _.chain(shows.payload)
+      //   .filter(function(item) {
+      //     return item.image && item.drm && item.episodeCount > 0;
+      //   })
+      //   .map(function(item) {
+      //     return {
+      //       image: item.image.showImage,
+      //       slug: item.slug,
+      //       title: item.title
+      //     };
+      //   }).value()});
+      //   
+      //   
+      
+
+     res.status(200).json({response: _.reduce(shows.payload, function(result, item) {
+        if (item.drm && item.image && item.episodeCount > 0) {
+          logger.debug('item: ', item);
+          result.push({
             image: item.image.showImage,
             slug: item.slug,
             title: item.title
-          };
-        }).value()});
+          });
+        }
+        return result;
+      }, [])});
 
 
     } catch (e) {
