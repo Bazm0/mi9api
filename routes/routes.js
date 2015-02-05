@@ -11,7 +11,7 @@ var routes = {
 
   processor: function(req, res) {
 
-    var shows = '';
+    var shows;
 
     res.header('Access-Control-Allow-Origin', '*');
 
@@ -24,7 +24,7 @@ var routes = {
 
       shows = JSON.parse(req.shows);
 
-      if (_.isNull(shows.payload) || !_.isArray(shows.payload)) {
+      if (!data.payload || !data.payload.push) {
         throw new Error('Incorrect post request data.');
       }
 
