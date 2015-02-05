@@ -24,7 +24,7 @@ var routes = {
 
       shows = JSON.parse(req.shows);
 
-      if (!data.payload || !data.payload.push) {
+      if (!shows.payload || !shows.payload.push) {
         throw new Error('Incorrect post request data.');
       }
 
