@@ -8,6 +8,8 @@ var logger = require('../utils/logger');
 
 var routes = {
 
+  var shows = '';
+
   processor: function(req, res) {
 
     res.header('Access-Control-Allow-Origin', '*');
@@ -19,26 +21,26 @@ var routes = {
         throw new Error('Invalid request operation.');
       }
 
-      var shows = JSON.parse(req.shows);
+      shows = JSON.parse(req.shows);
 
       if (_.isUndefined(shows.payload) || !_.isArray(shows.payload)) {
         throw new Error('Incorrect post request data.');
       }
 
 
-      res.json({
-        response: shows.payload
-          .filter(function(show) {
-            return show.image && show.drm && show.episodeCount > 0;
-          })
-          .map(function(show) {
-            return {
-              image: show.image.showImage,
-              slug: show.slug,
-              title: show.title
-            };
-          })
-      });
+      // res.json({
+      //   response: shows.payload
+      //     .filter(function(show) {
+      //       return show.image && show.drm && show.episodeCount > 0;
+      //     })
+      //     .map(function(show) {
+      //       return {
+      //         image: show.image.showImage,
+      //         slug: show.slug,
+      //         title: show.title
+      //       };
+      //     })
+      // });
 
 
       // var result = shows.payload
@@ -57,17 +59,17 @@ var routes = {
       // res.status(200).send(result);
 
 
-      // res.send({response: _.chain(shows.payload)
-      //   .filter(function(item) {
-      //     return item.image && item.drm && item.episodeCount > 0;
-      //   })
-      //   .map(function(item) {
-      //     return {
-      //       image: item.image.showImage,
-      //       slug: item.slug,
-      //       title: item.title
-      //     };
-      //   }).value()});
+      res.send({response: _.chain(shows.payload)
+        .filter(function(item) {
+          return item.image && item.drm && item.episodeCount > 0;
+        })
+        .map(function(item) {
+          return {
+            image: item.image.showImage,
+            slug: item.slug,
+            title: item.title
+          };
+        }).value()});
 
 
     } catch (e) {
