@@ -167,3 +167,5 @@
 {"level":"info","message":"127.0.0.1 - - [05/Feb/2015:03:18:50 +0000] \"POST / HTTP/1.1\" 200 938 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T03:18:50.093Z"}
 {"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-05T03:24:13.435Z"}
 {"level":"info","message":"127.0.0.1 - - [05/Feb/2015:03:24:16 +0000] \"POST / HTTP/1.1\" 200 938 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T03:24:16.025Z"}
+{"level":"info","message":"--- mi9api started on port 3000 ---","timestamp":"2015-02-05T03:27:37.727Z"}
+{"level":"info","message":"127.0.0.1 - - [05/Feb/2015:03:27:40 +0000] \"POST / HTTP/1.1\" 200 951 \"-\" \"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_10_1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/40.0.2214.94 Safari/537.36\"\n","timestamp":"2015-02-05T03:27:40.275Z"}

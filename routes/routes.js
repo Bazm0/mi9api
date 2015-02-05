@@ -26,20 +26,33 @@ var routes = {
       }
 
 
-      var result = shows.payload
-        .filter(function(show) {
-          return show.image && show.drm && show.episodeCount > 0;
+      // var result = shows.payload
+      //   .filter(function(show) {
+      //     return show.image && show.drm && show.episodeCount > 0;
+      //   })
+      //   .map(function(show) {
+      //     return {
+      //       image: show.image.showImage,
+      //       slug: show.slug,
+      //       title: show.title
+      //     };
+      //   });
+
+
+      // res.status(200).send(result);
+
+
+      res.send({response: _.chain(shows.payload)
+        .filter(function(item) {
+          return item.image && item.drm && item.episodeCount > 0;
         })
-        .map(function(show) {
+        .map(function(item) {
           return {
-            image: show.image.showImage,
-            slug: show.slug,
-            title: show.title
+            image: item.image.showImage,
+            slug: item.slug,
+            title: item.title
           };
-        });
-
-
-      res.status(200).send(result);
+        }).value()});
 
 
     } catch (e) {
