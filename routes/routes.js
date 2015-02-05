@@ -25,8 +25,21 @@ var routes = {
         throw new Error('Incorrect post request data.');
       }
 
-      var result =
-        _.chain(shows.payload)
+      // var result =
+      //   _.chain(shows.payload)
+      //   .filter(function(item) {
+      //     return item.image && item.drm && item.episodeCount > 0;
+      //   })
+      //   .map(function(item) {
+      //     return {
+      //       image: item.image.showImage,
+      //       slug: item.slug,
+      //       title: item.title
+      //     };
+      //   });
+
+
+      res.send(_.chain(shows.payload)
         .filter(function(item) {
           return item.image && item.drm && item.episodeCount > 0;
         })
@@ -36,10 +49,7 @@ var routes = {
             slug: item.slug,
             title: item.title
           };
-        });
-
-
-      res.send(result);
+        }));
 
 
     } catch (e) {
