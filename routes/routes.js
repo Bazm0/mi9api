@@ -25,20 +25,40 @@ var routes = {
             throw 'Request data is incorrectly formatted.';
         }
 
-        var results = _.reduce(shows.payload, function(result, item) {
-          if (item.drm && item.image && item.episodeCount > 0) {
 
-            logger.debug('item: ', item);
-            result.push({
-              image: item.image.showImage,
-              slug: item.slug,
-              title: item.title
-            });
-          }
-          return result;
-        }, []);
 
-        res.status(200).send(results);
+      res.json({
+            response:
+                shows.payload
+                    .filter(function (payloadItem) {
+                        return payloadItem.image &&
+                                payloadItem.drm &&
+                                payloadItem.episodeCount > 0;
+                    })
+                    .map(function (payloadItem) {
+                        return { 
+                            image: payloadItem.image.showImage, 
+                            slug: payloadItem.slug, 
+                            title: payloadItem.title
+                        };
+                    })
+        });
+
+
+        // var results = _.reduce(shows.payload, function(result, item) {
+        //   if (item.drm && item.image && item.episodeCount > 0) {
+
+        //     logger.debug('item: ', item);
+        //     result.push({
+        //       image: item.image.showImage,
+        //       slug: item.slug,
+        //       title: item.title
+        //     });
+        //   }
+        //   return result;
+        // }, []);
+
+        // res.status(200).send(results);
 
         // res.json({
         //     response:
