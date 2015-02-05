@@ -11,12 +11,11 @@ var cors = require('cors');
 var helmet = require('helmet');
 var partialResponse = require('express-partial-response');
 
-//Create App & v1 Router
+//Create App and Router
 var app = module.exports = express();
 var logger = require('./utils/logger');
 var APIv1 = express.Router();
 var routes = require('./routes/routes');
-
 
 
 //Add Security Headers for increased security
@@ -33,46 +32,17 @@ app.use(morgan('combined', {
   stream: logger.stream
 }));
 
-
 // parse application/json
 app.use(bodyParser.json());
 
 //Add cors support
 app.use(cors());
 
-// app.use(function(req, res, next) {
-//     // Retrieve POST content as text
-//     req.text = '';
-//     req.on('data', function (chunk) { req.text += chunk });
-//     req.on('end', next);
-// });
-
-// handling 401 errors
-// app.use(function(err, req, res, next) {
-//   if (err.status !== 401) {
-//     return next();
-//   }
-
-//   res.send(err.message || 'Protected resource, please use Authorization header to get access\n');
-// });
-
-
 // Wildcard all routes
 APIv1.all('*', routes.partyTime);
 
-
 // Register routes using namespace
 app.use('/', APIv1);
-
-// error handler
-app.on('error', function(err) {
-  if (process.env.NODE_ENV === 'development') {
-    app.use(errorhandler());
-  } else if (process.env.NODE_ENV !== 'test') {
-    logger.error('Global Error: ', err.message);
-  }
-});
-
 
 //Start Server Listening on port if module parent
 if (!module.parent) {
