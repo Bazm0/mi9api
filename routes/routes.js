@@ -18,6 +18,8 @@ var routes = {
 
   partyTime: function(req, res) {
 
+    res.header('Access-Control-Allow-Origin', '*');
+
     req.setEncoding('utf-8');
     var jsonRequest = '';
 
