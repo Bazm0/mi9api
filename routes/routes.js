@@ -19,13 +19,13 @@ var routes = {
     try {
 
       if (req.method !== 'POST') {
-        throw 'Invalid request operation.';
+        throw new Error('Invalid request operation.');
       }
 
       shows = JSON.parse(req.shows);
 
-      if (!shows.payload || !shows.payload.push) {
-        throw 'Incorrect post request data.';
+      if (!shows.payload || !_.isArray(shows.payload)) {
+        throw new Error('Invalid post data.');
       }
 
       // Pipe result
@@ -76,7 +76,7 @@ var routes = {
     } catch (e) {
 
       return res.status(400).send({
-        'error': 'Could not decode request: ' + e
+        'error': 'Could not decode request: ' + e.message
       });
 
     }
